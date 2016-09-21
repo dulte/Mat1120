@@ -7,6 +7,12 @@
 \usepackage{amsmath}
 \usepackage{pstricks}
 \usepackage{subfigure}
+
+\usepackage{listings}
+\usepackage{color} %red, green, blue, yellow, cyan, magenta, black, white
+\definecolor{mygreen}{RGB}{28,172,0} % color values Red, Green, Blue
+\definecolor{mylilas}{RGB}{170,55,241}
+
 \usepackage{bm}
 \usepackage{booktabs}       % Pakke for pene tabeller
                             % http://ctan.uib.no/macros/latex/contrib/booktabs/booktabs.pdf
@@ -33,12 +39,31 @@
 \author{Daniel Heinesen, daniehei}
 
 \begin{document}
+
+
+
+\lstset{language=Matlab,%
+    %basicstyle=\color{red},
+    breaklines=true,%
+    morekeywords={matlab2tikz},
+    keywordstyle=\color{blue},%
+    morekeywords=[2]{1}, keywordstyle=[2]{\color{black}},
+    identifierstyle=\color{black},%
+    stringstyle=\color{mylilas},
+    commentstyle=\color{mygreen},%
+    showstringspaces=false,%without this there will be a symbol in the places where there is a space
+    numbers=left,%
+    numberstyle={\tiny \color{black}},% size of the numbers
+    numbersep=9pt, % this defines how far the numbers are from the text
+    emph=[1]{for,end,break},emphstyle=[1]\color{red}, %some words to emphasise
+    %emph=[2]{word1,word2}, emphstyle=[2]{style},    
+}
 \maketitle
 \newpage
 
-\textbf{Oppgave 1:}
+\textbf{Oppgave 1:}\\
 
-For å finne linkmatrisen ser vi at det går en link fra dokument 1 til 2, 3 og 4. Vi får da en ener i rad 2,3 og 4 i kolonne. Linken fra dokument 2 til 3 og 4 utgjør på samme måte kolonne 2. Linken fra dokument 3 til 1 utgjør kolonne 3, og linkene fra dokument 4 til 1 og 3 utgjør kolonne 4. Siden ingen av dokumentene er linket til seg selv er diagonalen 0. Vi får da matrisen:
+Linkmatrisen er en matrise som viser linkene mellom dokumenter. Setter sier at kolonnene representerer dokumentene som linker, mens radene er hvor disse linkes. Vi begynner med å sette en 1 som element $a_{ji}$ om dokument i linkes til dokument j. Vi ser vi at det går en link fra dokument 1 til 2, 3 og 4. Vi får da en ener i rad 2,3 og 4 i kolonne. Linken fra dokument 2 til 3 og 4 utgjør på samme måte kolonne 2. Samme for kolonne 3 og 4. Vi får da matrisen:
 
 $$
 \begin{pmatrix}
@@ -49,7 +74,7 @@ $$
 \end{pmatrix}
 $$
 
-Men for at dette skal være en stokastisk matrise må summen av elementene i kolonnen være lik 1. Vi tar derfor å dele elementene i kolonnen på summen av elementene. Vi får da den stokastiske linkmatrisen:
+Men for at dette skal være en stokastisk matrise må summen av elementene i kolonnene være lik 1. Vi tar derfor og deler elementene i kolonnen på summen av elementene. Vi får da den stokastiske linkmatrisen:
 
 
 $$
@@ -103,7 +128,7 @@ $$
 x_3 = \frac{3}{2}x_4
 $$
 
-Og siden det bare er 0'er, som betyrn at $x_4$ er en fri variabel. Setter vi $x_4 = 6$ Dette betyr
+Og siden det bare er 0'er i siste rad, så har vi én fri variabel: $x_4$. Setter vi $x_4 = 6$ for å få heltall i vektoren:
 
 $$
 Nul(\textbf{A} -\textbf{I}) = span\{ \begin{bmatrix}
@@ -117,10 +142,27 @@ $$
 \frac{1}{31} \begin{bmatrix}
 12 \\ 4 \\ 9 \\ 6
 \end{bmatrix}
+= \begin{bmatrix}
+0.38710 \\ 0.12903 \\ 0.29032 \\ 0.19355
+\end{bmatrix}
 $$\\
 
+Rankingen da blir:
 
-\textbf{Oppgave 2:}
+
+\begin{center}
+\begin{tabular}{l | r}
+Ranking & Document \\ \hline
+1 & 1\\
+2 & 3\\
+3 & 4\\
+4 & 2
+\end{tabular}
+\end{center}
+
+\newpage
+
+\textbf{Oppgave 2:}\\
 
 Bruker vi samme metode som over finner vi at linkmatrisen for system 2 er:
 
@@ -169,7 +211,7 @@ $$
 x_5 = 0
 $$
 
-Vi har er 2 rader med bare 0'er, som betyr at vi har 2 frie variabler, $x_2$ og $x_4$.
+Vi har er 2 rader med bare 0'er, som betyr at vi har 2 frie variabler, $x_2$ og $x_4$. Setter vi at disse er er lik $1$, får vi:
 
 $$
 Nul(\textbf{A} -\textbf{I}) = span\{ \begin{bmatrix}
@@ -180,19 +222,21 @@ Nul(\textbf{A} -\textbf{I}) = span\{ \begin{bmatrix}
 \end{bmatrix} \}
 $$
 
-Siden vi har 2 basiser er det \underline{ikke} mulig å finne en unik scorevektor, som vi antok fra linkmatrisen.\\
+Siden vi har 2 basiser er det \underline{ikke} mulig å finne en unik scorevektor, akkurat som vi kunne se ut i fra linkmatrisen/diagrammet. Siden det ikke finnes en unik scorevektor kan vi heller ikke finne en rank for disse dokumentene.\\
+
+
 
 \textbf{Oppgave 3):}
 
-Begge matrisen i oppgavene over er stokastiske, siden vi sikret oss om at summen av elementene i kolonnene var 1.\\
+Begge matrisene i oppgavene over er stokastiske, siden vi sikret oss om at summen av elementene i kolonnene var 1, og de er begge kvadratiske.\\
 
-For å være regulære må matrisene ha en potens $k$ hvor alle elementene i $A^{k}$ er positive, da vil, for alle potenser $m>k$ $A^{m}$ også bare ha positive elementer. Matrisen vil da ha en unik scorevektor (teorem 18).\\
+For å være regulære må matrisene ha en potens $k$ hvor alle elementene i $A^{k}$ er positive, da vil, for alle potenser $A^{m}$, $m>k$ også bare ha positive elementer. Matrisen vil da ha en unik scorevektor (teorem 18).\\
 
-Matrisen i oppgave 1 har 0-elementer, men sjekker man på matlab finner man at $A^{6}$ har bare positive elementer, og det finnes en unik scorevektor, hvilket vi vet siden vi allerde har funnet den. Denne er derfor regulær.\\
+Matrisen i oppgave 1 har 0-elementer, men sjekker man på matlab finner man at $A^{6}$ har bare positive elementer, og det finnes en unik scorevektor, hvilket vi vet siden vi allerde har funnet den. Denne er derfor regulær. Vi vet også at denne matrisen har en unik scorevektor, som sier oss at den er regulær.\\
 
 For matrisen i oppgave 2 vet vi allede at det ikke finnes en unik scorevektor, så den kan per teorem 18 ikke være regulær.\\
 
-\textbf{Oppgave 4):}
+\textbf{Oppgave 4):}\\
 
 $$
 \textbf{M} = (1-m)\textbf{A} - m\textbf{S}
@@ -216,11 +260,11 @@ $$
 = (1-m) + m = 1
 $$
 
-M er derfor stokastisk så lenge \textbf{A} er stokastisk.\\
+Vi vet A er kvadratisk, og S er per definisjon kvadratisk. M er derfor stokastisk så lenge \textbf{A} er stokastisk.\\
 
-For at M skal være regulær må elementene være positive. Vi vet at alle elementene i \textbf{A} er $\geq 0$, derfor vil også $(1-m)\textbf{A}$ også være det. $m\textbf{S} = m/n > 0$. Dette betyr at $(1-m)\textbf{A} + m\textbf{S}$ bare har positive elementer. Siden matriseprodukten er dotproduktet av rader og kolonner, hvor alle elementene er positive tall, vil også produktet bare ha positive elementer. Derfor vil $\textbf{M}^{k}$ for $k>0$ bare ha strengt positive elementer, og \textbf{M} er regulær.\\
+For at M skal være regulær må elementene være strengt positive. Vi vet at alle elementene i \textbf{A} er $\geq 0$, derfor vil også $(1-m)\textbf{A}$ også være det. $m\textbf{S} = m/n > 0$. Dette betyr at $(1-m)\textbf{A} + m\textbf{S}$ bare har positive elementer. Siden matriseprodukten er dotproduktet av rader og kolonner, hvor alle elementene er positive tall, vil også produktet bare ha positive elementer. Derfor vil $\textbf{M}^{k}$ for $k>0$ bare ha strengt positive elementer, og \textbf{M} er regulær.\\
 
-\textbf{Oppgave 5):}
+\textbf{Oppgave 5):}\\
 
 For linkmatrisen \textbf{A} i oppgave 1, får vi, med $m = 0.15$:
 
@@ -251,15 +295,17 @@ $$
 \end{bmatrix}
 $$\\
 
-\textbf{Oppgave 6):}
+\textbf{Oppgave 6):}\\
 
-Det denne funksjonen gjør er at den lager en matrise med 0'ere og 1'ere spredd tilfeldig i matrisen, deretter sjekker den om det er noen kolonner som bare inneholder 0'ere, og om det er tilfelle blir en 1'er lagt til. Elementene i diagonalen blir satt til 0. Tilslutt normaliseres kolonnene. \\
+Det denne funksjonen gjør er at den lager en matrise med 0'ere og 1'ere spredd tilfeldig i matrisen, deretter sjekker den om det er noen kolonner som bare inneholder 0'ere, og om det er tilfelle blir en 1'er lagt til n-te rad. Elementene i diagonalen blir satt til 0. Siste kolonne blir sjekket seperat, siden vi ikke kan legge til en 1 i n-te rad her, siden dette er på diagonalen. Derfor settes det heller en 1'er i første rad skulle det ikke være noen andre enere i kolonnen. Tilslutt normaliseres kolonnene. \\
 
-Siden alle kolonnene nå bare har positive elementer og summen av elementene er 1, så har vi en stokastisk matrise. Men vi ville ikke at noen av dokumentene skal linke til seg selv, men siden diagonalen bare inneholder 0'er, vil dette være tilfellet. Dette betyrn at alle kravene for en linkmatrise er oppfylt.\\
+Siden alle kolonnene nå bare har positive elementer og summen av elementene er 1, så har vi en stokastisk matrise. Men vi ville ikke at noen av dokumentene skal linke til seg selv, men siden diagonalen bare inneholder 0'er, vil dette være tilfellet. Dette betyr at alle kravene for en linkmatrise er oppfylt.\\
 
-\textbf{Oppgave 7):}
+\newpage
 
-Jeg får den tilfeldige linkmatrisen:
+\textbf{Oppgave 7):}\\
+
+Jeg fikk den tilfeldige linkmatrisen:
 
 $$
 \begin{pmatrix}
@@ -280,8 +326,27 @@ Linkdiagrammet blir:
 \end{center}
 \end{figure} 
 
+\newpage
 
-\textbf{Oppgave 10):}
+
+\textbf{Oppgave 8):}\\
+
+Dette er kodet i Octave og ikke matlab, men jeg tror det skal kunne kjøres i begge programmene: \\
+
+\lstinputlisting{ranking.m}
+
+\newpage
+
+
+\textbf{Oppgave 9):}\\
+
+Som over, er dette kodet i Octave:\\
+
+\lstinputlisting{rankingapprox.m}
+
+\newpage
+
+\textbf{Oppgave 10):}\\
 
 Som i oppgave 1 er
 
@@ -314,7 +379,7 @@ $$
 \end{bmatrix}
 $$
 
-Vi kan se at disse 2 vektorene nesten er like, som vi forventer av funksjonene. Senker vi $\delta$ litt vil de komme nærmere hverandre, og ved $\delta = 0.0005$ vil de allerde være like hverandre ned til den 5 desimalspresisjonen jeg har brukt her.
+Vi kan se at disse 2 vektorene nesten er like, som vi forventer av funksjonene. Senker vi $\delta$ litt vil de komme nærmere hverandre, og ved enda mindre $\delta$ konvergerer de raskt mot hverandre.
 
 
 
