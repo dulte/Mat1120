@@ -147,7 +147,7 @@ $$
 \end{bmatrix}
 $$\\
 
-Rankingen da blir:
+Rankingen blir da:
 
 
 \begin{center}
@@ -236,13 +236,15 @@ Matrisen i oppgave 1 har 0-elementer, men sjekker man på matlab finner man at $
 
 For matrisen i oppgave 2 vet vi allede at det ikke finnes en unik scorevektor, så den kan per teorem 18 ikke være regulær.\\
 
+En enkel måte å få en web med ikke-stokastisk linkmatrise er å ha et dokument som ikke har noen linker. Vi vil da ha en kolonne med bare 0'ere. Summen av denne kolonnen vil da ikke være lik 1, og matrisen er derfor ikke stokastisk.\\
+
 \textbf{Oppgave 4):}\\
 
 $$
 \textbf{M} = (1-m)\textbf{A} - m\textbf{S}
 $$
 
-For å finne om $M$ er stokatisk kan vi summere en virkårlig kolonne, og ser om det blir 1. Kolonnen er:
+For å finne ut om $M$ er stokatisk kan vi summere en virkårlig kolonne, og ser om det blir 1. Kolonnen er:
 
 $$
 \textbf{m}_i =
@@ -301,7 +303,6 @@ Det denne funksjonen gjør er at den lager en matrise med 0'ere og 1'ere spredd 
 
 Siden alle kolonnene nå bare har positive elementer og summen av elementene er 1, så har vi en stokastisk matrise. Men vi ville ikke at noen av dokumentene skal linke til seg selv, men siden diagonalen bare inneholder 0'er, vil dette være tilfellet. Dette betyr at alle kravene for en linkmatrise er oppfylt.\\
 
-\newpage
 
 \textbf{Oppgave 7):}\\
 
