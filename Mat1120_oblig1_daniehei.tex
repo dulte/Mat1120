@@ -63,7 +63,7 @@
 
 \textbf{Oppgave 1:}\\
 
-Linkmatrisen er en matrise som viser linkene mellom dokumenter. Setter sier at kolonnene representerer dokumentene som linker, mens radene er hvor disse linkes. Vi begynner med å sette en 1 som element $a_{ji}$ om dokument i linkes til dokument j. Vi ser vi at det går en link fra dokument 1 til 2, 3 og 4. Vi får da en ener i rad 2,3 og 4 i kolonne. Linken fra dokument 2 til 3 og 4 utgjør på samme måte kolonne 2. Samme for kolonne 3 og 4. Vi får da matrisen:
+Linkmatrisen er en matrise som viser linkene mellom dokumenter. Vi lar kolonnene representere dokumentene som linker, mens radene er hvor disse linkes. Vi begynner med å sette en 1 som element $a_{ji}$ om dokument i linkes til dokument j. Vi ser vi at det går en link fra dokument 1 til 2, 3 og 4. Vi får da en ener i rad 2,3 og 4 i kolonne. Linken fra dokument 2 til 3 og 4 utgjør på samme måte kolonne 2. Tilsvarende for kolonne 3 og 4. Vi får da matrisen:
 
 $$
 \begin{pmatrix}
@@ -74,7 +74,7 @@ $$
 \end{pmatrix}
 $$
 
-Men for at dette skal være en stokastisk matrise må summen av elementene i kolonnene være lik 1. Vi tar derfor og deler elementene i kolonnen på summen av elementene. Vi får da den stokastiske linkmatrisen:
+Men for at dette skal være en stokastisk matrise må summen av elementene i kolonnene være lik 1. Vi deler derfor elementene i kolonnen på summen av elementene. Vi får da den stokastiske linkmatrisen:
 
 
 $$
@@ -176,7 +176,7 @@ $$
 \end{pmatrix}
 $$\\
 
-Vi kan allerde her se at vi kommer til å få problemer, siden 1 og 2, og 3 og 4 bare sender frem og tilbake til hverandre noe som betyr at vi ikke kommer til å oppnå noe likevekt mellom dem. Men la oss bevise det matematisk. Vi regner derfor ut $Nul(\textbf{A}-\textbf{I})$:
+Vi kan allerede her se at vi kommer til å få problemer, siden 1 og 2, og 3 og 4 bare sender frem og tilbake til hverandre noe som betyr at vi ikke kommer til å oppnå noe likevekt mellom dem. Men la oss bevise det matematisk. Vi regner derfor ut $Nul(\textbf{A}-\textbf{I})$:
 
 $$
 (\textbf{A}-\textbf{I}) = 
@@ -232,7 +232,7 @@ Begge matrisene i oppgavene over er stokastiske, siden vi sikret oss om at summe
 
 For å være regulære må matrisene ha en potens $k$ hvor alle elementene i $A^{k}$ er positive, da vil, for alle potenser $A^{m}$, $m>k$ også bare ha positive elementer. Matrisen vil da ha en unik scorevektor (teorem 18).\\
 
-Matrisen i oppgave 1 har 0-elementer, men sjekker man på matlab finner man at $A^{6}$ har bare positive elementer, og det finnes en unik scorevektor, hvilket vi vet siden vi allerde har funnet den. Denne er derfor regulær. Vi vet også at denne matrisen har en unik scorevektor, som sier oss at den er regulær.\\
+Matrisen i oppgave 1 har 0-elementer, men sjekker man på matlab finner man at $A^{6}$ har bare positive elementer, og det finnes en unik scorevektor, hvilket vi vet siden vi allerede har funnet den. Denne er derfor regulær. Vi vet også at denne matrisen har en unik scorevektor, som sier oss at den er regulær.\\
 
 For matrisen i oppgave 2 vet vi allede at det ikke finnes en unik scorevektor, så den kan per teorem 18 ikke være regulær.\\
 
@@ -244,7 +244,7 @@ $$
 \textbf{M} = (1-m)\textbf{A} - m\textbf{S}
 $$
 
-For å finne ut om $M$ er stokatisk kan vi summere en virkårlig kolonne, og ser om det blir 1. Kolonnen er:
+For å finne ut om $M$ er stokatisk kan vi summere en vilkårlig kolonne, og ser om det blir 1. Kolonnen er:
 
 $$
 \textbf{m}_i =
@@ -264,7 +264,7 @@ $$
 
 Vi vet A er kvadratisk, og S er per definisjon kvadratisk. M er derfor stokastisk så lenge \textbf{A} er stokastisk.\\
 
-For at M skal være regulær må elementene være strengt positive. Vi vet at alle elementene i \textbf{A} er $\geq 0$, derfor vil også $(1-m)\textbf{A}$ også være det. $m\textbf{S} = m/n > 0$. Dette betyr at $(1-m)\textbf{A} + m\textbf{S}$ bare har positive elementer. Siden matriseprodukten er dotproduktet av rader og kolonner, hvor alle elementene er positive tall, vil også produktet bare ha positive elementer. Derfor vil $\textbf{M}^{k}$ for $k>0$ bare ha strengt positive elementer, og \textbf{M} er regulær.\\
+For at M skal være regulær må elementene være strengt positive. Vi vet at alle elementene i \textbf{A} er $\geq 0$, derfor vil også $(1-m)\textbf{A}$ også være det. $m\textbf{S} = m/n > 0$. Dette betyr at $(1-m)\textbf{A} + m\textbf{S}$ bare har positive elementer. Siden matriseproduktet er dotproduktet av rader og kolonner, hvor alle elementene er positive tall, vil også produktet bare ha positive elementer. Derfor vil $\textbf{M}^{k}$ for $k>0$ bare ha strengt positive elementer, og \textbf{M} er regulær.\\
 
 \textbf{Oppgave 5):}\\
 
@@ -289,7 +289,7 @@ Nul(\textbf{M} - \textbf{I}) = span\{ \begin{bmatrix}
 \end{bmatrix} \}
 $$
 
-Normaliserer vi basisen finenr vi scorevektoren for \textbf{M}
+Normaliserer vi basisen finner vi scorevektoren for \textbf{M}
 
 $$
 \begin{bmatrix}
