@@ -7,10 +7,10 @@ function plotSigma(A,k)
   [U,S,V] = svd(A);
   
   s = diag(S);
-  
+  x = linspace(1,256,256);
   graphics_toolkit("gnuplot")
   figure(1);
-  plot(s(1:k));
+  plot(x,s(1:k));
   title("Value of sigmas");
   xlabel("index j");
   ylabel("value of sigma_j");
