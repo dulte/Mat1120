@@ -242,5 +242,69 @@ Jeg laget et lite progam jeg laget for å plotte $\sigma_j$
 
 \lstinputlisting{plotSigma.m}
 
+Plotter vi alle sigmaene får vi:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width = 70mm]{sigmas.png}
+\caption{Sigmaverdiene for mm.gif}
+\end{center}
+\end{figure}
+
+Vi kan se at verdien for $\sigma_j$ raskt går mot 0. Dette betyr at den viktige informasjonen om bildet ligger i relativt få $\sigma$'er. Som vi så i deloppgave c fikk vi et ganske klart bilde med bare de 32 første $\sigma$'ene.\\
+
+For en tilfeldig matrise får vi dette bildet:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width = 70mm]{randomPic.png}
+\caption{Bildet som tilsvarer en tilfeldig matrise. Bare støy.}
+\end{center}
+\end{figure}
+
+Vi får da denne fordelingen av $\sigma$
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width = 70mm]{random.png}
+\caption{Sigmaverdiene for en tilfeldig matrise.}
+\end{center}
+\end{figure}
+
+Vi kan se at $\sigma_1$ inneholder det meste av informasjonen. Men etter dette synker verdiene for $\sigma$ saktere enn for Marilyn Monroe, hvilket betyr at vi trenger flere ledd for å gi en god tilnærming til den tilfeldige matrisen. Grunnet til dette kan være at bildet av Marilyn Monroe inneholder områder bestående av mye hvit rundt henne, i tillegg til at det er flere områder i ansiktet hennes med lik farge. I det tilfeldige bildet, derimot, er det ingen større områder med samme farge, og man trenger derfor flere $\sigma$'er for å tilnærme det. 
+
+
+\paragraph*{Oppgave 5}
+
+\subparagraph*{a)}
+
+Om vi vil lagre bildet for $k$ $\sigma$'er må vi lagre disse $\sigma$'er. I tillegg trenger vi å lagre $k$ $\bold{u}_j$, som har størrelsen $m \times 1$, og $k$ $\bold{v}_j$, som har størrelsen $1 \times n$. Vi trenger med andre ord $(k + k\cdot m + k\cdot n)\cdot 8$ bits.\\ 
+
+Etter litt eksprementering fant jeg ut at $k = 40$ gir et ganske godt bilde. Det ser fortsatt litt kornete ut, men forstyrrelsene rundt nakken og håret har forsvunnet:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width = 70mm]{k40.png}
+\caption{Et ganske bra bildet med $k = 40$}
+\end{center}
+\end{figure}
+
+\subparagraph*{b)}
+
+Programmet for å regne ut feilen:
+
+\lstinputlisting{relError.m}
+
+Feilen mellom orginalbildet og tilnærmingen med $k = 40$ er:
+
+\begin{verbatim}
+>> relError(A,AK)
+ans =  0.0064210
+\end{verbatim}
+
+Hvilke er en ganske god tilnærming.
+
+
+
 
 \end{document}
