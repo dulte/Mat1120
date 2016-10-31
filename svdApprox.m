@@ -11,7 +11,7 @@ function AK=svdApprox(A,k)
   AK = zeros(size(A));
   
   for j=1:(k)
-    AK += S(j,j)*U(:,j)*V(:,j)';
+    AK = AK + S(j,j)*U(:,j)*V(:,j)';
   end
   
-  AK = uint8(AK); #I AK is double the image isnt saved correctly
+  AK = uint8(AK); #If AK is double the image isnt saved correctly
