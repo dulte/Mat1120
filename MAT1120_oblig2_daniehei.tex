@@ -57,7 +57,7 @@ $$
 \end{bmatrix}
 \begin{bmatrix}
 {v}_1
-\ldots 
+\cdots 
 {v}_n 
 \end{bmatrix}
 $$ 
@@ -65,7 +65,7 @@ $$
 $$
 =
 \begin{bmatrix}
-u_1 v_1 && \ldots && u_1 v_n \\
+u_1 v_1 && \cdots && u_1 v_n \\
 \vdots && \ddots && \vdots \\
 u_mv_1 && \cdots && u_m v_n
 \end{bmatrix}
@@ -93,6 +93,7 @@ og
 rank(\bold{u}) = dim(col(\bold{u}\bold{v}^T)) = 1 
 \end{equation}
 
+Vi kan teste dette i Matlab med 2 tilfeldige vektorer. 
 
 \begin{verbatim}
 >> u = rand(4,1);
@@ -108,6 +109,10 @@ ans =
 >> rank(u*v')
 ans =  1
 \end{verbatim}
+
+Vi ser da at rangen er 1, som vi forventet.
+
+\newpage
 
 
 \paragraph*{Oppgave 2}
@@ -134,19 +139,19 @@ Siden $\bold{\Sigma}$ er en diagonalmatrise vil
 $$
 \bold{U\Sigma} =
 \begin{bmatrix}
+\bold{u}_1 && \ldots && \bold{u}_m
+\end{bmatrix}
+\begin{bmatrix}
 \sigma_1 && \cdots && \cdots && 0 \\
 0 && \ddots && \ddots && \vdots \\
 \ldots && \ddots && \sigma_r && \vdots \\
 0 && \cdots && \cdots && 0
 \end{bmatrix}
-\begin{bmatrix}
-\bold{u}_1 && \ldots && \bold{u}_m
-\end{bmatrix}
 $$
 $$
 =
 \begin{bmatrix}
-\sigma_1 \bold{u}_1 && \ldots && \sigma_r \bold{u}_r && \cdots && 0
+\sigma_1 \bold{u}_1 && \cdots && \sigma_r \bold{u}_r && \cdots && 0
 \end{bmatrix}
 $$
 og får da
@@ -181,6 +186,8 @@ Vi får da til slutt at
 \bold{A} = \sum_{j=1}^n Col_j(\bold{U\Sigma}) Row_j(\bold{V}^T) = \sum_{j=1}^n \sigma_i \bold{u}_j \bold{v}_j^T
 \end{equation}
 
+\newpage
+
 \paragraph*{Oppgave 3}
 
 \subparagraph*{a)}
@@ -193,7 +200,7 @@ Vi får da til slutt at
 
 \subparagraph*{b)}
 
-Vi laster inn bildet som en matrise og sjekker rangen den med \textbf{rank}-kommandoen og \textbf{rank}($A,\epsilon$) med $\epsilon = 0.001$
+Vi laster inn bildet som en matrise og sjekker rangen med \textbf{rank}-kommandoen og \textbf{rank}($A,\epsilon$) med $\epsilon = 0.001$
 
 \begin{verbatim}
 >> A = imread("mm.gif","gif");
@@ -205,6 +212,8 @@ ans =  256
 \end{verbatim}
 
 Vi kan se at begge kommandoene gir samme svar $rank(A) = 256$.
+
+\newpage
 
 \subparagraph*{c)}
 
@@ -226,11 +235,13 @@ og for $k = 32$:
 \end{center}
 \end{figure}
 
-Med $k = 8$ kan vi såvidt se at hvem bildet er av, og for $K=32$ er kan man helt tydelig se motivet. Man kan likevel se at bildet har blitt komprimert, særlig rundt halsen og håret. Vi burde med andre ord velge en noe større $k$ for at bildet skal ha en god kvalitet.
+Med $k = 8$ kan vi såvidt se hvem bildet er av, og for $k=32$ er kan man helt tydelig se motivet. Man kan likevel se at bildet har blitt komprimert, særlig rundt halsen og håret. Vi burde med andre ord velge en noe større $k$ for at bildet skal ha en aksepterbar kvalitet.
+
+\newpage
 
 \subparagraph*{d)}
 
-Figur 1 i oppgaveteksten består av nøyanser av sort til grå. Gjør vi dette til en matrise kan vil kolonnene bestå av de forskjellige "fargene". Alle elementene i en kolonne er like, hvilket betyr at radene i denne matrisen er like. Siden vi kan skrive rangen til denne matrisen som 
+Figur 1 i oppgaveteksten består av nøyanser av sort til grå. Gjør vi dette til en matrise vil kolonnene bestå av de forskjellige nøyansene. Kolonnene inneholder én nøyanse hver(elementene i denne kolonnen er like), hvilket betyr at alle radene i denne matrisen er like. Siden vi kan skrive rangen til denne matrisen som 
 
 $$Rank(\bold{A}) = dim(Col(\bold{A})) = dim(Row(\bold{A}))$$
 
@@ -242,16 +253,18 @@ Jeg laget et lite progam jeg laget for å plotte $\sigma_j$
 
 \lstinputlisting{plotSigma.m}
 
-Plotter vi alle sigmaene får vi:
+Plotter vi alle singulærverdiene får vi:
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width = 70mm]{sigmas.png}
-\caption{Sigmaverdiene for mm.gif}
+\caption{Singulærverdiene for mm.gif}
 \end{center}
 \end{figure}
 
-Vi kan se at verdien for $\sigma_j$ raskt går mot 0. Dette betyr at den viktige informasjonen om bildet ligger i relativt få $\sigma$'er. Som vi så i deloppgave c fikk vi et ganske klart bilde med bare de 32 første $\sigma$'ene.\\
+Vi kan se at verdien for $\sigma_j$ raskt går mot 0. Dette betyr at den viktige informasjonen om bildet ligger i relativt få singulærverier. Som vi så i deloppgave c fikk vi et ganske klart bilde med bare de 32 første singulærverdiene.\\
+
+\newpage
 
 For en tilfeldig matrise får vi dette bildet:
 
@@ -267,20 +280,22 @@ Singulærverdiene til bildet og den tilfeldige matrisen plottet mot hverandre:
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width = 70mm]{randomAndImage.png}
-\caption{Sigmaverdiene for en tilfeldig matrise.}
+\caption{Singulærverdiene for en tilfeldig matrise og bildet.}
 \end{center}
 \end{figure}
 
-For det tilfeldige bildet kan vi se at $\sigma_1$ inneholder det meste av informasjonen. Men etter dette synker verdiene for $\sigma$ saktere enn for Marilyn Monroe, hvilket betyr at vi trenger flere ledd for å gi en god tilnærming til den tilfeldige matrisen. Grunnet til dette kan være at bildet av Marilyn Monroe inneholder områder bestående av mye hvit rundt henne, i tillegg til at det er flere områder i ansiktet hennes med lik farge. I det tilfeldige bildet, derimot, er det ingen større områder med samme farge, og man trenger derfor flere $\sigma$'er for å tilnærme det. 
+For det tilfeldige bildet kan vi se at $\sigma_1$ inneholder det meste av informasjonen. Men etter dette synker verdiene for $\sigma$ saktere enn for Marilyn Monroe, hvilket betyr at vi trenger flere ledd for å gi en god tilnærming til den tilfeldige matrisen. Grunnet til dette kan være at bildet av Marilyn Monroe inneholder områder bestående av mye hvit rundt henne, i tillegg til at det er flere områder i ansiktet hennes med lik farge. I det tilfeldige bildet, derimot, er det ingen store områder med samme farge, og man trenger derfor flere singulærverdier for å tilnærme matrisen. 
+
+\newpage
 
 
 \paragraph*{Oppgave 5}
 
 \subparagraph*{a)}
 
-Om vi vil lagre bildet for $k$ $\sigma$'er må vi lagre disse $\sigma$'er. I tillegg trenger vi å lagre $k$ $\bold{u}_j$, som har størrelsen $m \times 1$, og $k$ $\bold{v}_j$, som har størrelsen $1 \times n$. Vi trenger med andre ord $(k + k\cdot m + k\cdot n)\cdot 8$ bits.\\ 
+Om vi vil lagre bildet for $k$ singulærverdier må vi lagre disse verdiene. I tillegg trenger vi å lagre $k$ $\bold{u}_j$'er, som har størrelsen $m \times 1$, og $k$ $\bold{v}_j$'er, som har størrelsen $1 \times n$. Vi trenger med andre ord å lagre $(k + k\cdot m + k\cdot n)$ tall.\\ 
 
-Etter litt eksprementering fant jeg ut at $k = 40$ gir et ganske godt bilde. Det ser fortsatt litt kornete ut, men forstyrrelsene rundt nakken og håret har forsvunnet:
+Etter litt eksprementering fant jeg ut at $k = 40$ gir et ganske godt bilde. Om man ser godt nok kan man se at det er noe kornete, men forstyrrelsene rundt nakken og håret har forsvunnet:
 
 \begin{figure}[H]
 \begin{center}
